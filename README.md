@@ -29,3 +29,6 @@ Pseudocode:
 
 *Scoring a state:
 	For now, a state's score should be a function of how many pieces are solved, and but also how many pieces are solved with respect to adjacent pieces.
+
+
+Eventually I'll make this in C++ for a 3x3, but for now I'll make it in python for a 2x2 to see if it has any promise. For this I'll be using David Adams's rubik python library. https://github.com/alotofdavid/rubik
