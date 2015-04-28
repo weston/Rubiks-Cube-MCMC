@@ -1,5 +1,5 @@
-# Rubik's Cube MCCS
-Markov Chain Monte Carlo Solver for a 2x2 Rubik's Cube
+# Rubik's Cube MCMC
+Markov Chain Monte Carlo Solver for a 3x3 Rubik's Cube
 
 The algorithm:
 	For a given scramble
