@@ -18,7 +18,7 @@ Pseudocode:
 	while !is_valid_solution(candidate_solution,state)
 		new_candidate = change_one_move_randomly(solution)
 		d = score(new_candidate) - score(candidate_solution)
-		if d < 0 OR random() < e^(d/t)
+		if d < 0 OR random() < e^(-d/t)
 			candidate_solution = new_candidate
 		if score(candidate_solution) < score(best)
 			best = candidate_solution
