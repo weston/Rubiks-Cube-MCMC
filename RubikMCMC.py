@@ -116,6 +116,9 @@ def trimMoveString(mv):
 
 
 #Takes in a move string and randomly changes one move in the string
+#UPDATE: Now, it changes a move in a move string, and then 
+# if that state has been evaluated before, continues to change the string, one
+# character at a time.
 def alterSolution(scramble,visitedStates,c):
 	cubeState = dc.deepcopy(c)
 	scrambleArr = dc.deepcopy(scramble).split()
@@ -166,7 +169,7 @@ def main():
 		if (numIters % 1000 == 0):
 			print " .",
 		if numIters % 10000 == 0:
-			print "Considered " + str(numIters) + " solutions so far. " + str(bestScore) +"/" + str(MAX_SCORE)
+			print "Considered " + str(numIters) + " solutions so far. Best score so far is " + str(bestScore) +"/" + str(MAX_SCORE)
 			print "Searching . . .",
 		newSolution = alterSolution(candidateSolution,visitedStates,c)
 		newCube = dc.deepcopy(c)
