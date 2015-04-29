@@ -1,7 +1,7 @@
 # Rubik's Cube MCMC
 Markov Chain Monte Carlo Solver for a 3x3 Rubik's Cube
 
-The algorithm:
+#The algorithm:
 	For a given scramble
 	Choose a random N length string of moves as a candidate solution
 	while the candidate solution does not actually solve the scramble
@@ -10,7 +10,7 @@ The algorithm:
 		-If this new solution is better than the candidate solution, update the candidate solution to be the new solution.
 		-Else, with probability e^(-d/t), update the candidate solution to the new solution, where d is the difference in scores between the candidate solution and the new solution, and t is some constant > 0 that governs the trade off between local search and random search.
 
-Pseudocode:
+#Pseudocode:
 
 	state = current_state()
 	candidate_solution = random_moves(N)
@@ -32,3 +32,7 @@ Pseudocode:
 
 
 Eventually I'll make this in C++ for a 3x3, but for now I'll make it in python for a 2x2 to see if it has any promise. For this I'll be using David Adams's rubik python library. https://github.com/alotofdavid/rubik
+
+#How to run:
+In the project directory, invoke "Python RubikMCMC.py"
+It will generate a scramble for it to solve, and then begin searching for a solution.
