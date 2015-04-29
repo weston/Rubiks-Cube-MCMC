@@ -72,6 +72,49 @@ def isSolved(cubeState):
 			return False
 	return True
 
+def trimMoveString(mv):
+	moveArr = str(mv).split()
+	suffixes = [" ","2","'"]
+	changedSomething = True
+	while changedSomething == True:
+		changedSomething = False
+		for i in range(len(moveArr) - 1):
+			if moveArr[i][0] == moveArr[i+1][0]:
+				total = 0
+				firstMove = list(moveArr[i])
+				secondMove = list(moveArr[i + 1])
+				changedSomething = True
+				if len(firstMove) == 1:
+					total += 1
+				if len(firstMove) > 1 and firstMove[1] == '2':
+					total += 2
+				if len(firstMove) > 1 and firstMove[1] == "'":
+					total += 3
+				if len(secondMove) == 1:
+					total += 1
+				if len(secondMove) > 1 and secondMove [1] == '2':
+					total += 2
+				if len(secondMove) > 1 and secondMove [1] == "'":
+					total += 3
+				moveArr.pop(i + 1)
+				total = total % 4
+				if len(firstMove) == 1:
+					firstMove.append(" ")
+				if total == 0:
+					moveArr.pop(i)
+					break
+				if total == 1:
+					firstMove[1] = ""
+				if total == 2:
+					firstMove[1] = "2"
+				if total == 3:
+					firstMove[1] = "'"
+				moveArr[i] = "".join(firstMove)
+				break
+	return " ".join(moveArr)
+
+
+
 #Takes in a move string and randomly changes one move in the string
 def alterSolution(scramble):
 	scrambleArr = dc.deepcopy(scramble).split()
@@ -106,7 +149,8 @@ def main():
 	bestSolution = candidateSolution
 	bestScore = candidateScore
 	T = 10000
-	print "Beginning the search for a solution."
+	print "Beginning the search for a solution to",
+	print trimMoveString(alg)
 	numIters = 0
 	while bestScore < MAX_SCORE:
 		numIters += 1
@@ -127,9 +171,12 @@ def main():
 		if candidateScore > bestScore:
 			bestSolution = candidateSolution
 			bestScore = newScore
+	print trimMoveString(alg)
 	print "The solution to the scramble ",  
-	print alg, 
+	print trimMoveString(alg), 
 	print " is: " 		
-	print bestSolution
+	print trimMoveString(bestSolution)
 	print "Considered " + str(numIters) + " solutions."
+
+
 main()
