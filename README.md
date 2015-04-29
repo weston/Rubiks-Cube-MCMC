@@ -1,5 +1,5 @@
 # Rubik's Cube MCMC
-Markov Chain Monte Carlo Solver for a 3x3 Rubik's Cube
+Markov Chain Monte Carlo Solver for a 2x2 Rubik's Cube
 
 The algorithm:
 	For a given scramble
@@ -27,8 +27,9 @@ The algorithm:
 
 
 
-*Scoring a state:
-	For now, a state's score should be a function of how many pieces are solved, and but also how many pieces are solved with respect to adjacent pieces.
+#*Scoring a state:
+	As of now, the scoring algorithm is: #correctStickers + (blockWeight * #blocks)
+	It seems to perform well for blockWeight = ~2. This hueristic has the problem that a two-swap, on a 2x2 cube, is many moves from being solved, but has a very good score in this hueristic.
 
 
 Eventually I'll make this in C++ for a 3x3, but for now I'll make it in python for a 2x2 to see if it has any promise. For this I'll be using David Adams's rubik python library. https://github.com/alotofdavid/rubik
