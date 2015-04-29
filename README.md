@@ -39,7 +39,7 @@ In the project directory, invoke "Python RubikMCMC.py"
 
 It will generate a scramble for it to solve, and then begin searching for a solution.
 
-#Example solutons found by RubikMCMC.py 
+#Example solutions found by RubikMCMC.py 
 4/29/2015
 Given pretty short scrambles for now...
 
