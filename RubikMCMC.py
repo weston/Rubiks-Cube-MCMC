@@ -116,15 +116,19 @@ def trimMoveString(mv):
 
 
 #Takes in a move string and randomly changes one move in the string
-def alterSolution(scramble):
+def alterSolution(scramble,visitedStates,c):
+	cubeState = dc.deepcopy(c)
 	scrambleArr = dc.deepcopy(scramble).split()
 	scrambleLength = len(scrambleArr)
-	numChanges = rand.randint(1,17)
-	for i in range(numChanges):
+	while str(cubeState.cube) in visitedStates:
+		cubeState = dc.deepcopy(c)
 		newMoveIndex = rand.randint(0,len(MOVE_SET) - 1)
 		oldMoveIndex = rand.randint(0,scrambleLength - 1)
 		scrambleArr[oldMoveIndex] = MOVE_SET[newMoveIndex]
-	return " ".join(scrambleArr)
+		moveString = " ".join(scrambleArr)
+		cubeState.apply_alg(rb.Algorithm(moveString))	
+	visitedStates.add(str(cubeState.cube))
+	return moveString
 
 #Generates a random string of moves as a candidate solution
 def genRandomSolution():
@@ -142,16 +146,21 @@ def main():
 	alg = rb.Algorithm(genRandomSolution())
 	#alg = rb.Algorithm(sys.argv[1])
 	c.apply_alg(alg)
+	
 	candidateSolution = genRandomSolution()
 	candidateSolutionCube = dc.deepcopy(c)
 	candidateSolutionCube.apply_alg(rb.Algorithm(candidateSolution))
 	candidateScore = scoreCubeState(candidateSolutionCube)###
 	bestSolution = candidateSolution
 	bestScore = candidateScore
+	visitedStates = set()
+	visitedStates.add(str(candidateSolutionCube.cube))
+	visitedStates.add(str(c.cube))
 	T = 10000
 	print "Beginning the search for a solution to",
 	print trimMoveString(alg)
 	numIters = 0
+	print "Searching . . .",
 	while bestScore < MAX_SCORE:
 		numIters += 1
 		if (numIters % 1000 == 0):
@@ -159,7 +168,7 @@ def main():
 		if numIters % 10000 == 0:
 			print "Considered " + str(numIters) + " solutions so far. " + str(bestScore) +"/" + str(MAX_SCORE)
 			print "Searching . . .",
-		newSolution = alterSolution(candidateSolution)
+		newSolution = alterSolution(candidateSolution,visitedStates,c)
 		newCube = dc.deepcopy(c)
 		newCube.apply_alg(rb.Algorithm(newSolution))
 		newScore = scoreCubeState(newCube)
