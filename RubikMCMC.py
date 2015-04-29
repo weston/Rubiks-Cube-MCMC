@@ -96,33 +96,25 @@ def genRandomSolution():
 #Main function runs the main MCMC routines
 def main():
 	c = rb.Cube()
-
-	algStr = "F' R U F' U2 R' U F2 U'" 
-	#alg = rb.Algorithm(genRandomSolution())
-	#alg = rb.Algorithm(algStr)
 	alg = rb.Algorithm(genRandomSolution())
-
+	#alg = rb.Algorithm(sys.argv[1])
 	c.apply_alg(alg)
-	print "The scramble is ",
-	print alg
-	#Applied some scramble to a 2x2 cube
-	print "MAX SCORE IS ",
-	print MAX_SCORE
 	candidateSolution = genRandomSolution()
 	candidateSolutionCube = dc.deepcopy(c)
 	candidateSolutionCube.apply_alg(rb.Algorithm(candidateSolution))
 	candidateScore = scoreCubeState(candidateSolutionCube)###
 	bestSolution = candidateSolution
 	bestScore = candidateScore
-	T = 1000
+	T = 10000
+	print "Beginning the search for a solution."
 	numIters = 0
 	while bestScore < MAX_SCORE:
 		numIters += 1
+		if (numIters % 1000 == 0):
+			print " .",
 		if numIters % 10000 == 0:
-			print "Scramble is ",
-			print alg
-			print bestSolution
-			print bestScore
+			print "Considered " + str(numIters) + " solutions so far. " + str(bestScore) +"/" + str(MAX_SCORE)
+			print "Searching . . .",
 		newSolution = alterSolution(candidateSolution)
 		newCube = dc.deepcopy(c)
 		newCube.apply_alg(rb.Algorithm(newSolution))
@@ -135,6 +127,9 @@ def main():
 		if candidateScore > bestScore:
 			bestSolution = candidateSolution
 			bestScore = newScore
+	print "The solution to the scramble ",  
+	print alg, 
+	print " is: " 		
 	print bestSolution
-	print bestScore
+	print "Considered " + str(numIters) + " solutions."
 main()
