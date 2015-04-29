@@ -36,10 +36,13 @@ Eventually I'll make this in C++ for a 3x3, but for now I'll make it in python f
 
 #How to run:
 In the project directory, invoke "Python RubikMCMC.py"
+
 It will generate a scramble for it to solve, and then begin searching for a solution.
 
 #Example solutons found by RubikMCMC.py 
 4/29/2015
 Given pretty short scrambles for now...
+
 F R U F R F' -> U' R2 F' U2 R' U2 R
+
 U R U F U R U' R2 -> R2 U F' R' U' F' U2
