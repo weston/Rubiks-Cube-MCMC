@@ -5,7 +5,7 @@ import numpy as np
 import sys
 
 MOVE_SET = ["U","F","R","U'","F'","R'","U2","R2","F2"]
-BLOCK_SCORE = 8
+BLOCK_SCORE = 1
 MAX_NUM_BLOCKS = 12
 NUM_STICKERS = 24
 MAX_SCORE = (BLOCK_SCORE * MAX_NUM_BLOCKS) + NUM_STICKERS
@@ -99,7 +99,9 @@ def main():
 
 	algStr = "F' R U F' U2 R' U F2 U'" 
 	#alg = rb.Algorithm(genRandomSolution())
-	alg = rb.Algorithm(algStr)
+	#alg = rb.Algorithm(algStr)
+	alg = rb.Algorithm(genRandomSolution())
+
 	c.apply_alg(alg)
 	print "The scramble is ",
 	print alg
@@ -116,11 +118,11 @@ def main():
 	numIters = 0
 	while bestScore < MAX_SCORE:
 		numIters += 1
-		if numIters % 1000 == 0:
-			print numIters
-			print bestScore
 		if numIters % 10000 == 0:
+			print "Scramble is ",
+			print alg
 			print bestSolution
+			print bestScore
 		newSolution = alterSolution(candidateSolution)
 		newCube = dc.deepcopy(c)
 		newCube.apply_alg(rb.Algorithm(newSolution))
