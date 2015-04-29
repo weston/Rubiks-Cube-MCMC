@@ -159,7 +159,7 @@ def main():
 	visitedStates = set()
 	visitedStates.add(str(candidateSolutionCube.cube))
 	visitedStates.add(str(c.cube))
-	T = 10000
+	T = 1000
 	print "Beginning the search for a solution to",
 	print trimMoveString(alg)
 	numIters = 0
@@ -176,7 +176,7 @@ def main():
 		newCube.apply_alg(rb.Algorithm(newSolution))
 		newScore = scoreCubeState(newCube)
 		d = candidateScore - newScore
-		prob = np.e**(-d/ T)
+		prob = np.e**(-float(d)/T)
 		if d < 0 or rand.random() <= prob:
 			candidateScore = newScore	
 			candidateSolution = newSolution
