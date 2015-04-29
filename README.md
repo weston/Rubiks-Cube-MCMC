@@ -1,5 +1,5 @@
 # Rubik's Cube MCMC
-Markov Chain Monte Carlo Solver for a 3x3 Rubik's Cube
+Markov Chain Monte Carlo Solver for a 2x2 Rubik's Cube
 
 The algorithm:
 	For a given scramble
@@ -10,7 +10,7 @@ The algorithm:
 		-If this new solution is better than the candidate solution, update the candidate solution to be the new solution.
 		-Else, with probability e^(-d/t), update the candidate solution to the new solution, where d is the difference in scores between the candidate solution and the new solution, and t is some constant > 0 that governs the trade off between local search and random search.
 
-Pseudocode:
+#Pseudocode:
 
 	state = current_state()
 	candidate_solution = random_moves(N)
@@ -27,8 +27,26 @@ Pseudocode:
 
 
 
-*Scoring a state:
-	For now, a state's score should be a function of how many pieces are solved, and but also how many pieces are solved with respect to adjacent pieces.
+#*Scoring a state:
+As of now, the scoring algorithm is: #correctStickers + (blockWeight * #blocks)
+It seems to perform well for blockWeight = ~4. This hueristic has the problem that a two-swap, on a 2x2 cube, is many moves from being solved, but has a very good score in this hueristic.
 
 
 Eventually I'll make this in C++ for a 3x3, but for now I'll make it in python for a 2x2 to see if it has any promise. For this I'll be using David Adams's rubik python library. https://github.com/alotofdavid/rubik
+
+#How to run:
+In the project directory, invoke "Python RubikMCMC.py"
+
+It will generate a scramble for it to solve, and then begin searching for a solution.
+
+#Example solutions found by RubikMCMC.py 
+4/29/2015
+Given pretty short scrambles for now...
+
+F R U F R F'(6) -> U' R2 F' U2 R' U2 R (7), explored 26226 states
+
+U R U F U R U' R2 (8) -> R2 U F' R' U' F' U2 (7), explored 6268 states.
+
+R F R2 F2 U2 F' U'(7) -> U F U2 F2 R2 F' R' (7), explored 29949 states.
+
+F' U' R U F U R2 F2 (8)  -> F2 R' F' R' U' (5), explored 31585 states
