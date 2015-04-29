@@ -1,7 +1,7 @@
 # Rubik's Cube MCMC
 Markov Chain Monte Carlo Solver for a 3x3 Rubik's Cube
 
-#The algorithm:
+The algorithm:
 	For a given scramble
 	Choose a random N length string of moves as a candidate solution
 	while the candidate solution does not actually solve the scramble
