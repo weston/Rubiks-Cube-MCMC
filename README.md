@@ -47,5 +47,6 @@ F R U F R F'(6) -> U' R2 F' U2 R' U2 R (7), explored 26226 states
 
 U R U F U R U' R2 (8) -> R2 U F' R' U' F' U2 (7), explored 6268 states.
 
-R F R2 F2 U2 F' U'(7) -> U F U2 F2 R2 F' R' (7), (inverse) by exploring 29949 states.
+R F R2 F2 U2 F' U'(7) -> U F U2 F2 R2 F' R' (7), explored 29949 states.
 
+F' U' R U F U R2 F2 (8)  -> F2 R' F' R' U' (5), explored 31585 states
