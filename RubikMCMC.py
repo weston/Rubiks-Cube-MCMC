@@ -159,7 +159,7 @@ def main():
 	visitedStates = set()
 	visitedStates.add(str(candidateSolutionCube.cube))
 	visitedStates.add(str(c.cube))
-	T = 1000
+	T = 100
 	print "Beginning the search for a solution to",
 	print trimMoveString(alg)
 	numIters = 0
